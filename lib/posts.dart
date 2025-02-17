@@ -51,7 +51,7 @@ class PostsPage extends StatelessWidget {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          "User ID: ${post.nomor}",
+                          "User ID: ${post.userid}",
                           style: TextStyle(color: Colors.grey[700]),
                         ),
                       ],
