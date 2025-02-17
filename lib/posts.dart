@@ -38,7 +38,7 @@ class PostsPage extends StatelessWidget {
                                     ),
                                 ),
                             ),
-                            leading: Icon(Icons.album),
+                            leading: Icon(Icons.photo_album_sharp),
                             title: Text(post.title),
                             subtitle: Text(post.body),
                         ),
