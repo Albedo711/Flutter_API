@@ -10,15 +10,15 @@ class PostsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Posts"),
+        title: Text("Al-quran"),
       ),
       body: FutureBuilder(
         future: httpService.getPosts(),
-        builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<Alquran>> snapshot) {
           if (snapshot.hasData) {
-            List<Post> posts = snapshot.data!;
+            List<Alquran> posts = snapshot.data!;
             return ListView(
-              children: posts.map((Post post) {
+              children: posts.map((Alquran post) {
                 return Card(
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   elevation: 3,
@@ -31,29 +31,32 @@ class PostsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ListTile(
-                            onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => PostDetail(
-                                        post: post,
-                                    ),
-                                ),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PostDetail(post: post),
                             ),
-                            leading: Icon(Icons.photo_album_sharp),
-                            title: Text(post.title),
-                            subtitle: Text(post.body),
-                        ),
-                        Text(
-                          post.title,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
                           ),
+                          leading: CircleAvatar(
+                            child: Text(
+                              post.nomor.toString(),
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                          title: Text(
+                            "${post.namaLatin}",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Arti: ${post.arti}"),
+                              Text("Jumlah Ayat: ${post.jumlahAyat}"),
+                              Text("Tempat Turun: ${post.tempatTurun}"),
+                            ],
+                          ),
+                         
                         ),
-                        SizedBox(height: 5),
-                        Text(
-                          "User ID: ${post.userId}",
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
+                       
                       ],
                     ),
                   ),
